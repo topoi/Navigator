@@ -100,7 +100,8 @@ onClick: function(event) {
         var sel_rec_ids = grid.getSelection();
         if (sel_rec_ids.length) {
           var sel_record = grid.get(sel_rec_ids[0]);
-          loadMetadata(sel_record.id_persons);
+          loadMetadata((parseInt(sel_record.id_persons)+10000).toString());
+          
           
         } else {
           alert("Nothing selected!");
