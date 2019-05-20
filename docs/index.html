@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PostgreSQL</title>
+
+
+<style>
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+.select-wrapper {
+     background-color: #3498DB;
+      font-size: 26px;
+      width: 200px;
+    }
+.show {display: block;}
+</style>
+  <link rel="stylesheet" type="text/css" href="http://w2ui.com/src/w2ui-1.4.min.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="http://w2ui.com/src/w2ui-1.4.min.js"></script>
+
+</head>
+    <body>
+
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+
+<!--
+<select id="select" class="select-wrapper">
+  <option selected disabled>Choose one</option>
+  <option value="names">names</option>
+  <option value="persons">persons</option>
+  <option value="dating">dating</option>
+  <option value="relations">relations</option>
+  <option value="titles">titles</option>
+  <option value="objects">objects</option>
+</select>
+-->
+
+<h1>PostgreSQL Interface</h1>
+<form >
+  <div>
+    <p> Query </p> 
+    <input id="first" type="text" style="width: 400px">
+    <!--<input type="submit">-->
+    <p> Table </p>
+    <input id="second" type="text" style="width: 400px">
+    <input type="submit">
+    
+  </div>
+</form>
+<span></span>
+<div id="myGrid" style="height: 700px"></div>
+
+<script>
+var data_from_ajax;
+
+/*
+$( "form" ).submit(function( event ) {
+  alert($("#first" ).val())
+  alert($("#second" ).val())
+  event.preventDefault();
+});
+*/
+
+
+
+$("document").ready(function(){
+$( "form" ).submit(function( event ) {
+
+  $.getJSON('result.json', function(obj) {
+  
+  if (w2ui['myGrid'] != null) {
+  w2ui['myGrid'].destroy();
+  
+  };  
+  $('#myGrid').w2grid({ 
+    name   : 'myGrid', 
+    show: { 
+            lineNumbers: true,
+            toolbar: true,
+            footer: true
+    },
+    multiSearch: true,
+    searches: obj[0],
+    columns: obj[1],
+    records: obj[2]
+       });   
+    
+    });
+
+
+event.preventDefault();
+});
+});
+
+
+</script>
+<div></div>
+</body>
+</html>
+
