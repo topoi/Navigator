@@ -97,6 +97,7 @@ $("document").ready(function(){
     onSelect: function (target, eventData) {
 	   
             obj=eventData.id_persons;
+	    alert(obj)
             loadMetadata(obj);
 	    return eventData;
         }
