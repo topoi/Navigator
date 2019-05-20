@@ -48,35 +48,36 @@
     }
 .show {display: block;}
 </style>
-  <link rel="stylesheet" type="text/css" href="css/w2ui.css" />
-  <script src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/w2ui.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://w2ui.com/src/w2ui-1.4.min.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="http://w2ui.com/src/w2ui-1.4.min.js"></script>
 
 </head>
     <body>
-
-
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
-
-<!--
-<select id="select" class="select-wrapper">
-  <option selected disabled>Choose one</option>
-  <option value="names">names</option>
-  <option value="persons">persons</option>
-  <option value="dating">dating</option>
-  <option value="relations">relations</option>
-  <option value="titles">titles</option>
-  <option value="objects">objects</option>
-</select>
--->
-
 <span></span>
-<div id="myGrid" style="height: 700px"></div>
+
+<div id="layout" style="width: 100%; height: 900px;"></div>
 
 <script>
+<!-- LAYOUT -->
+$(function () {
+    var pstyle = 'border: 1px solid #dfdfdf; padding: 5px;';
+    $('#layout').w2layout({
+        name: 'layout',
+        panels: [
+            { type: 'top', size: 400, style: pstyle, content: '<div id="myGrid" style="height: 700px"></div>' },
+            { type: 'bottom', size: 500, style: pstyle, content: '<iframe id="metadata" src="" height="100%" width="100%"></iframe>' }
+        ]
+    });
+});
+
+
+
 var data_from_ajax;
+
 $("document").ready(function(){
-  $.getJSON('dating.json', function(obj) {
+
+  $.getJSON('result.json', function(obj) {
   
   if (w2ui['myGrid'] != null) {
   w2ui['myGrid'].destroy();
@@ -92,14 +93,25 @@ $("document").ready(function(){
     multiSearch: true,
     searches: obj[0],
     columns: obj[1],
-    records: obj[2]
+    records: obj[2],
+    onSelect: function (target, eventData) {
+	   
+            obj=eventData.recid;
+            loadMetadata(obj);
+	    return eventData;
+        }
        });   
     
-   
+    });
 
+
+function loadMetadata(obj)
+{
+    
+      document.getElementById('metadata').setAttribute('src', "http://repositorytest.ancient-astronomy.org/collection/PROM/object/"+obj);
+};
 
 event.preventDefault();
-});
 });
 
 
@@ -107,4 +119,6 @@ event.preventDefault();
 <div></div>
 </body>
 </html>
+
+
 
