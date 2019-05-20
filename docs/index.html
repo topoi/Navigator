@@ -94,6 +94,23 @@ $("document").ready(function(){
     searches: obj[0],
     columns: obj[1],
     records: obj[2],
+onClick: function(event) {
+     var grid = this;
+      event.onComplete = function() {
+        var sel_rec_ids = grid.getSelection();
+        if (sel_rec_ids.length) {
+          var sel_record = grid.get(sel_rec_ids[0]);
+          loadMetadata(sel_record.id_persons);
+          
+        } else {
+          alert("Nothing selected!");
+        }
+    
+    }
+    }  
+	  
+	  
+	  /*
     onSelect: function (target, eventData) {
 	   
             obj=eventData.id_persons;
@@ -101,6 +118,7 @@ $("document").ready(function(){
             loadMetadata(obj);
 	    return eventData;
         }
+	  */
        });   
     
     });
