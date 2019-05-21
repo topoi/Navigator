@@ -120,6 +120,7 @@ $("document").ready(function(){
         if (sel_rec_ids.length) {
           var sel_record = grid.get(sel_rec_ids[0]);
           if (dataset === 'persons.json') {id=(parseInt(sel_record.id_persons)+10000).toString()}
+          if (dataset === 'titles.json') {id=(parseInt(sel_record.id)+20000).toString()}
           //if (dataset === 'persons.json') {id=sel_record.id_persons}
           if (dataset === 'objects.json') {id=sel_record.id_objects}
           loadMetadata(id);
