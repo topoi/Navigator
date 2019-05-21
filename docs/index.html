@@ -121,7 +121,7 @@ $("document").ready(function(){
           if (dataset === 'persons.json') {id=(parseInt(sel_record.id_persons)+10000).toString()}
           //if (dataset === 'persons.json') {id=sel_record.id_persons}
           if (dataset === 'objects.json') {id=sel_record.id_objects}
-          loadMetadata((parseInt(id)+10000).toString());
+          loadMetadata(id);
           
         } else {
           alert("Nothing selected!");
